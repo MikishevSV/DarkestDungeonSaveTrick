@@ -32,26 +32,31 @@ namespace WpfApp
             Data = new SavesData();
             if (Data.IsReady)
             {
-                LabelStatus.Content = "Готов к работе";
+                WriteStatus("Готов к работе");
                 ButtonLoad.IsEnabled = true;
                 ButtonSave.IsEnabled = true;
             }
             else
             {
-                LabelStatus.Content = "Не готов к работе!";
+                WriteStatus("Не готов к работе!");
                 ButtonLoad.IsEnabled = false;
                 ButtonSave.IsEnabled = false;
             }
+        }
+        private void WriteStatus(string aStatus)
+        {
+            DateTime dateTime = DateTime.Now;
+            LabelStatus.Content = dateTime.ToString() + " : " + aStatus;
         }
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
             if (Data.Save())
             {
-                LabelStatus.Content = "Сохранено успешно";
+                WriteStatus("Сохранено успешно");
             }
             else
             {
-                LabelStatus.Content = "Ошибка сохранения!";
+                WriteStatus("Ошибка сохранения!");
             }
         }
 
@@ -59,11 +64,11 @@ namespace WpfApp
         {
             if (Data.Load())
             {
-                LabelStatus.Content = "Загружено успешно";
+                WriteStatus("Загружено успешно");
             }
             else
             {
-                LabelStatus.Content = "Ошибка загрузки!";
+                WriteStatus("Ошибка загрузки!");
             }
         }
     }
